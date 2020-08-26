@@ -1,0 +1,29 @@
+.someClass {
+  font-family: sans;
+}
+
+#someID {
+  background: yellow;
+}
+
+.composition {
+  position: relative; // Shrink all the other photos
+  color: green;
+  
+  &:hover &__photo:not(:hover) {
+    transform: scale(.95);
+  }
+}
+
+input[type='checkbox']:focus ~ .selection-controls__clickable {}
+
+@supports (-webkit-background-clip: text) {
+  -webkit-background-clip: text; // Clips the background to exactly the places where the text sits
+  background-image: linear-gradient($light-green, $dark-green);
+  color: transparent; // Change the text to transparent too
+}
+
+input:checked + p {
+  background: #F9F9F9;
+  text-decoration: line-through;
+}

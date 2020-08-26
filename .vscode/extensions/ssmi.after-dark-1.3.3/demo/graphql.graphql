@@ -1,0 +1,33 @@
+# Comment
+{
+  oldField(
+    """
+    Description for argument
+    """
+    arg: Int
+  ) @deprecated(reason: "Use otherField instead.")
+
+}
+type AggregateUser {
+  
+  count: Int!
+  count2: Intti!
+}
+
+enum MutationType {
+  CREATED
+}
+
+type Query {
+  user(where: UserWhereUniqueInput!): User
+
+  """
+  Fetches an object given its ID
+  """
+  node(
+    """
+    The ID of an object
+    """
+    id: ID!
+  ): Node
+}
