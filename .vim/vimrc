@@ -1,0 +1,13 @@
+set nocompatible
+
+syntax on
+set number
+set hlsearch
+set incsearch
+
+" Vim-Plug
+call plug#begin()
+Plug 'vim-scripts/c.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'rip-rip/clang_complete'
+call plug#end()

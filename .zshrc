@@ -45,6 +45,8 @@ ZSH_THEME="spaceship"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -97,6 +99,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-wal -i /usr/share/backgrounds/parrot-glitch.jpg
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+wal -i /usr/share/backgrounds/parrot-glitch.jpg
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'

@@ -1,0 +1,18 @@
+2021/03/19-17:16:50.877 3 Reusing MANIFEST /home/jwjbadger/.config/vivaldi/Default/Local Storage/leveldb/MANIFEST-000001
+2021/03/19-17:16:50.897 3 Recovering log #59
+2021/03/19-17:16:50.954 3 Reusing old log /home/jwjbadger/.config/vivaldi/Default/Local Storage/leveldb/000059.log 
+2021/03/19-17:17:14.472 5 Level-0 table #63: started
+2021/03/19-17:17:14.570 5 Level-0 table #63: 338281 bytes OK
+2021/03/19-17:17:14.622 5 Delete type=0 #59
+2021/03/19-17:17:14.622 5 Compacting 4@0 + 1@1 files
+2021/03/19-17:17:14.704 5 Generated table #64@0: 142 keys, 519138 bytes
+2021/03/19-17:17:14.704 5 Compacted 4@0 + 1@1 files => 519138 bytes
+2021/03/19-17:17:14.743 5 compacted to: files[ 0 1 1 0 0 0 0 ]
+2021/03/19-17:17:14.744 5 Delete type=2 #58
+2021/03/19-17:17:14.744 5 Delete type=2 #54
+2021/03/19-17:17:14.744 5 Delete type=2 #56
+2021/03/19-17:17:14.744 5 Delete type=2 #60
+2021/03/19-17:17:14.744 5 Delete type=2 #63
+2021/03/19-17:25:10.359 9 Level-0 table #66: started
+2021/03/19-17:25:10.431 9 Level-0 table #66: 17438 bytes OK
+2021/03/19-17:25:10.471 9 Delete type=0 #62
