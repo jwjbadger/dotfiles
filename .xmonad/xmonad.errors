@@ -1,14 +1,8 @@
+$ ghc --make xmonad.hs -i -ilib -fforce-recomp -main-is main -dynamic -v0 -outputdir /home/jwjbadger/.xmonad/build-x86_64-linux -o /home/jwjbadger/.xmonad/xmonad-x86_64-linux
 
-xmonad.hs:201:16: warning: [-Wdeprecations]
-    In the use of ‘smartSpacing’ (imported from XMonad.Layout.Spacing):
-    Deprecated: "Use spacingRaw instead."
-    |
-201 |      tiled   = smartSpacing 10 $ Tall nmaster delta ratio
-    |                ^^^^^^^^^^^^
-
-xmonad.hs:259:1: warning: [-Wtabs]
-    Tab character found here, and in one further location.
+xmonad.hs:134:13: warning: [-Wtabs]
+    Tab character found here, and in five further locations.
     Please use spaces instead.
     |
-259 |         spawnOnce "wal -i /usr/share/backgrounds/parrot-glitch.jpg"
-    | ^^^^^^^^
+134 |     , ((modm              , xK_s), spawn "scrot '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'")
+    |             ^^^^

@@ -58,7 +58,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["Code", "Chat", "Web"]
+myWorkspaces    = ["Misc", "Web", "Code", "Chat"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -129,6 +129,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    
+    -- Screenshots
+    , ((modm		  , xK_s), spawn "scrot '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'")
+    , ((modm .|. shiftMask, xK_s), spawn "scrot -s -f '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'")
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -152,7 +156,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-shift-[1..9], Move client to workspace N
     --
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_3]
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_4]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
 
@@ -258,6 +262,8 @@ myLogHook = return ()
 myStartupHook = do
 	spawnOnce "wal -i /usr/share/backgrounds/parrot-glitch.jpg"
 	spawnOnce "picom &"
+	spawnOnce "polybar &"
+	spawnOnce "pulseaudio --start"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
