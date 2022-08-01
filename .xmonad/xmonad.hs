@@ -1,4 +1,3 @@
---
 -- xmonad example config file.
 --
 -- A template showing all available configuration hooks,
@@ -13,8 +12,15 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 
 import XMonad.Layout.Spacing
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Spiral
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.Grid
 
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.EwmhDesktops
 
 import Graphics.X11.ExtraTypes.XF86
@@ -58,7 +64,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["Misc", "Web", "Code", "Chat"]
+myWorkspaces    = ["Misc", "Games", "Code", "Chat"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -80,17 +86,20 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         
 
     -- launch dmenu
-    , ((modm,               xK_space ), spawn "dmenu_run")
+    , ((modm,               xK_space ), spawn "rofi -show run")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 
      -- Rotate through the available layout algorithms
     , ((modm,               xK_p     ), sendMessage NextLayout)
-
+	
+	-- Change layout to fullscreen 
+	, ((modm,               xK_f     ), sendMessage $ Toggle FULL)
+	
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_p     ), setLayout $ XMonad.layoutHook conf)
-
+	
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
 
@@ -199,10 +208,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts (tiled ||| Full)
+myLayout = smartSpacing 10 $ smartBorders $ mkToggle (NOBORDERS ?? FULL ?? EOT) $ avoidStruts (tiled ||| spiral (6/7) ||| ThreeCol nmaster delta ratio ||| Grid ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = smartSpacing 10 $ Tall nmaster delta ratio
+     tiled   = Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -228,9 +237,12 @@ myLayout = avoidStruts (tiled ||| Full)
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
+
 myManageHook = composeAll
     [ resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore
+	, (isFullscreen --> doFullFloat)
+	, checkDock --> doLower]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -242,7 +254,6 @@ myManageHook = composeAll
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
 myEventHook = mempty
-
 ------------------------------------------------------------------------
 -- Status bars and logging
 
@@ -272,7 +283,7 @@ myStartupHook = do
 --
 main = do   
   xmproc <- spawnPipe "polybar main &"
-  xmonad $ ewmh $ docks defaults
+  xmonad $ ewmh $ docks $ ewmhFullscreen defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will

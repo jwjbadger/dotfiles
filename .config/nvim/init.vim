@@ -4,7 +4,7 @@ syntax on
 set number
 set hlsearch
 set incsearch
-set tabstop=2
+set autoindent noexpandtab tabstop=4 shiftwidth=4
 
 " Vim-Plug
 call plug#begin("~/.local/share/nvim/site/plugged")
