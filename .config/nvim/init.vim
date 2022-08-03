@@ -20,12 +20,41 @@ Plug 'hrsh7th/nvim-cmp'
 " vsnip
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+
+" nerdtree
+Plug 'preservim/nerdtree'
+
+" fugitive (Git support)
+Plug 'tpope/vim-fugitive'
+
+" notify
+Plug 'rcarriga/nvim-notify'
+
+" treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" lualine
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
+
+" LeaderF (fuzzy search)
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+
+" neoformat
+Plug 'sbdchd/neoformat'
+
+" alpha-nvim 
+Plug 'goolord/alpha-nvim'
 call plug#end()
 
 " nvim-cmp setup
 
 lua <<EOF
-  -- Setup nvim-cmp.
+  -- notify
+  vim.notify = require("notify")
+  
+  -- nvim-cmp.
   local cmp = require'cmp'
 
   cmp.setup({
@@ -103,5 +132,53 @@ lua <<EOF
       filetypes = { "c", "cpp", "objc", "objcpp" };
       offset_encoding = "utf-32";
     }
-  } 
+  }
+
+  -- treesitter
+  require('nvim-treesitter.configs').setup {
+    ensure_installed = "all",
+    highlight = { enable = true },
+    indent = { enable = true }
+  }
+
+  -- lualine 
+  require('lualine').setup {
+    options = {
+      icons_enabled = true,
+      theme = 'horizon',
+      disabled_filetypes = {
+        statusline = {},
+        winbar = {},
+      },
+      ignore_focus = {},
+      refresh = {
+        statusline = 1000,
+        tabline = 1000,
+        winbar = 1000,
+      }
+    },
+  }
+
+  -- alpha-nvim
+  local alpha = require'alpha'
+  local dashboard = require("alpha.themes.dashboard")
+  dashboard.section.header.val = {
+    "                                                     ",
+    "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+    "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+    "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+    "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+    "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+    "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+    "                                                     ",
+  }
+  dashboard.section.buttons.val = {
+    dashboard.button( "Leader f f", "  > Find file", ":Leaderf file --popup<CR>"),
+    dashboard.button( "Leader f r", "  > Recent files"   , ":Leaderf mru --popup<CR>"),
+    dashboard.button( "Leader f g", "  > Project grep" , ":Leaderf rg --popup<CR>"),
+    dashboard.button( "u", "  > Update plugins" , ":PlugUpdate | :PlugUpgrade"),
+    dashboard.button( "e", "  > New file" , ":enew <CR>"),
+    dashboard.button( "q", "  > Quit NVIM", ":qa<CR>"),
+  }
+  alpha.setup(dashboard.opts)
 EOF
