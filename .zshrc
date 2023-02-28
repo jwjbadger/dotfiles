@@ -186,4 +186,5 @@ _comp_options=("${(@)_comp_options:#NO_ignoreclosebraces}")
 [[ -e ~/.shfuncs ]] && source ~/.shfuncs
 
 setopt notify
+
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
