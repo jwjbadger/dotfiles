@@ -197,6 +197,10 @@ super + shift + l
 super + p
 	dpass
 
+## Change keymap
+super + shift + @space 
+	/home/bspwm/.config/sxhkd/keymap	
+
 ## Music Controls
 super  + {less, greater, question}
 	playerctl {previous, next, play-pause}
