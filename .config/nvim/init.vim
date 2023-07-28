@@ -46,6 +46,9 @@ Plug 'sbdchd/neoformat'
 
 " alpha-nvim 
 Plug 'goolord/alpha-nvim'
+
+" Nerd Commenter
+Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
 " nvim-cmp setup
