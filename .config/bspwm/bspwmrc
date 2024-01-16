@@ -3,16 +3,16 @@
 #### MONITORS ####
 bspc monitor -d 1 2 3 4 5 6 7 8 9
 
-external_monitor=$(xrandr --query | grep 'HDMI-A-0')
+external_monitor=$(xrandr --query | grep 'HDMI-1')
 
-if [[ $external_monitor = HDMI-A-0\ connected* ]]; then
-	xrandr --output DisplayPort-0 --primary --mode 1920x1080 --rotate normal --output HDMI-A-0 --mode 1920x1080 --rotate normal --right-of DisplayPort-0
-	bspc monitor DisplayPort-0 -d 1 2 3 4 5
-	bspc monitor HDMI-A-0 -d I II III IV V 
+if [[ $external_monitor = HDMI-1\ connected* ]]; then
+	xrandr --output DP-1 --primary --mode 1920x1080 --rotate normal --output HDMI-1 --mode 1920x1080 --rotate normal --right-of DP-1
+	bspc monitor DP-1 -d 1 2 3 4 5
+	bspc monitor HDMI-1 -d I II III IV V 
 	polybar side &
 else
-	xrandr --output eDP-1-1 --auto
-	bspc monitor eDP-1-1 -d 1 2 3 4 5 6 7 8 9
+	xrandr --output DP-1 --auto
+	bspc monitor DP-1 -d 1 2 3 4 5 6 7 8 9
 fi
 
 # Truncate a couple of common commands that are used herein.
@@ -76,7 +76,7 @@ bspc desktop -f 1
 xsetroot -cursor_name left_ptr &
 sxhkd &
 # xcompmgr -cCfF -t -2 -l -2 -r 2.8 -o 0.55 -D 5 &
-picom &
+picom --daemon --backend=glx 
 dunst &
 polybar main &
 
