@@ -188,3 +188,5 @@ _comp_options=("${(@)_comp_options:#NO_ignoreclosebraces}")
 setopt notify
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+path+=('/home/bspwm/.cargo/bin/')
+export PATH

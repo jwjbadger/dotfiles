@@ -9,6 +9,9 @@ set autoindent noexpandtab tabstop=4 shiftwidth=4
 " Vim-Plug
 call plug#begin("~/.local/share/nvim/site/plugged")
 
+" mason
+Plug 'williamboman/mason.nvim'
+
 " nvim-cmp
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -56,6 +59,9 @@ call plug#end()
 lua <<EOF
   -- notify
   vim.notify = require("notify")
+  
+  -- mason
+  require("mason").setup()
   
   -- nvim-cmp.
   local cmp = require'cmp'
