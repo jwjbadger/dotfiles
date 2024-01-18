@@ -10,16 +10,12 @@ super + Return
 super + @space
 	rofi -show run 
 
-# rofi-emoji script
-super + j
-	rofi-emoji
-
 # Screenshot
 super + s 
-	scrot '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'	
+	/home/jwjbadger/.config/sxhkd/scrot.sh
 
 super + shift + s 
-	scrot -s -f '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
+	maim -s | xclip -selection clipboard -t image/png
 
 #####################
 # BSPWM Keybindings #
@@ -183,9 +179,9 @@ super + t; r
 
 #Volume Control
 XF86AudioLowerVolume
-	pamixer -u && pamixer -d 5
+	pamixer -u && pamixer -d 1
 XF86AudioRaiseVolume
-	pamixer -u && pamixer -i 5
+	pamixer -u && pamixer -i 1
 XF86AudioMute
 	pamixer -t
 

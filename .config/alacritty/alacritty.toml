@@ -34,4 +34,5 @@ family = "monospace"
 style = "Regular"
 
 [window]
-opacity = 0.85
+# Handle using picom
+#opacity = 0.80
